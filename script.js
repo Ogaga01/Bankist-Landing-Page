@@ -6,6 +6,9 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const navLinks = document.querySelector('.nav__links');
 const navLink = document.querySelectorAll('.nav__link');
+const tabContainer = document.querySelector('.operations__tab-container');
+const btnTab = document.querySelectorAll('.operations__tab');
+const content = document.querySelectorAll('.operations__content');
 
 /// ////////////////////////////////////
 // Modal window
@@ -41,4 +44,21 @@ navLinks.addEventListener('click', (e) => {
   }
 })
 
+tabContainer.addEventListener('click', (e) => {
+  e.preventDefault()
+  const btn = e.target.closest('.operations__tab');
 
+  if (!btn) return
+
+  btnTab.forEach((el) => {
+    el.classList.remove('operations__tab--active');
+  })
+  btn.classList.add('operations__tab--active');
+
+  content.forEach((con) => {
+    con.classList.remove('operations__content--active');
+  })
+  document
+    .querySelector(`.operations__content--${btn.dataset.tab}`)
+    .classList.add('operations__content--active');
+})
